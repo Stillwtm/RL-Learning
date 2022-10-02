@@ -38,9 +38,7 @@
 
 ![test50](./output/results/test50.png)
 
-测试时的表现：[可视化视频](./output/results/cliff-walking-50-episode-0.mp4)
-
-<video src="./output/results/cliff-walking-50-episode-0.mp4"></video>
+测试时的表现：[可视化视频](https://raw.githubusercontent.com/Stillwtm/RL-Learning/master/Q-Learning/output/results/cliff-walking-50-episode-0.mp4)
 
 可以看出，只训练50个episodes的模型还没有学会走路，它走了一步之后就开始面壁了。
 
@@ -50,9 +48,7 @@
 
 ![test100](./output/results/test100.png)
 
-测试时的表现：
-
-<video src="./output/results/cliff-walking-100-episode-0.mp4"></video>
+测试时的表现：[可视化视频](https://raw.githubusercontent.com/Stillwtm/RL-Learning/master/Q-Learning/output/results/cliff-walking-100-episode-0.mp4)
 
 可以看出训练时的reward曲线明显更加接近0了，但模型仍然没有收敛，这次甚至没有走路。
 
@@ -62,9 +58,7 @@
 
 ![test150](./output/results/test150.png)
 
-测试时的表现：
-
-<video src="./output/results/cliff-walking-150-episode-0.mp4"></video>
+测试时的表现：[可视化视频](https://raw.githubusercontent.com/Stillwtm/RL-Learning/master/Q-Learning/output/results/cliff-walking-150-episode-0.mp4)
 
 尽管不是最优路径，但令人惊喜的是这次他能够通关了！
 
@@ -74,9 +68,7 @@
 
 ![test200](./output/results/test200.png)
 
-其中一次测试时的表现：
-
-<video src="./output/results/cliff-walking-200-episode-0.mp4"></video>
+测试时的表现：[可视化视频](https://raw.githubusercontent.com/Stillwtm/RL-Learning/master/Q-Learning/output/results/cliff-walking-200-episode-0.mp4)
 
 小人再次进行了面壁。偶尔出现这种程度的反弹应该是正常的。
 
@@ -86,9 +78,7 @@
 
 ![train250](./output/results/test250.png)
 
-其中一次测试时的表现：
-
-<video src="./output/results/cliff-walking-250-episode-0.mp4"></video>
+测试时的表现：[可视化视频](https://raw.githubusercontent.com/Stillwtm/RL-Learning/master/Q-Learning/output/results/cliff-walking-250-episode-0.mp4)
 
 模型应该基本收敛了，小人已经可以以最优路径走到终点。
 
@@ -98,9 +88,7 @@
 
 ![test300](./output/results/test300.png)
 
-其中一次测试时的表现：
-
-<video src="./output/results/cliff-walking-300-episode-0.mp4"></video>
+测试时的表现：[可视化视频](https://raw.githubusercontent.com/Stillwtm/RL-Learning/master/Q-Learning/output/results/cliff-walking-300-episode-0.mp4)
 
 进一步确认模型确实收敛了。
 
