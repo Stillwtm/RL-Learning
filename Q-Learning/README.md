@@ -2,14 +2,14 @@
 
 ## 文件结构
 
-> .
-> ├── main.py
-> ├── output
-> │   ├── models
-> │   └── results
-> ├── qlearning.py
-> ├── README.md
-> └── solver.py
+> .  
+> ├── main.py  
+> ├── output  
+> │   ├── models  
+> │   └── results  
+> ├── qlearning.py  
+> ├── README.md  
+> └── solver.py  
 
 + `results`文件夹：为程序的输出结果，包括：在不同训练episode数下，训练及测试的reward曲线，以及挑选一次test录制的可视化的动作。
 + `models`文件夹：储存模型
@@ -38,7 +38,7 @@
 
 ![test50](./output/results/test50.png)
 
-测试时的表现：
+测试时的表现：[可视化视频](./output/results/cliff-walking-50-episode-0.mp4)
 
 <video src="./output/results/cliff-walking-50-episode-0.mp4"></video>
 
