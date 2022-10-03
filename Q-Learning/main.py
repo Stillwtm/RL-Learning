@@ -21,16 +21,16 @@ for train_eps in [50, 100, 150, 200, 250, 300]:
 
     env, agent = Solver.env_agent_config(cfg)
     res_dict = Solver.train(env, agent, cfg)
-    Solver.plot(res_dict['rewards'], cfg, tag='train', save=True, path='./output/results')
+    Solver.plot(res_dict['rewards'], cfg, tag='train', save=True, path='./output/results/')
 
     env = gym.make(cfg['env_name'], render_mode='rgb_array')  # 录制视频
     env = RecordVideo(
-        env, './output/',
+        env, './output/results/',
         episode_trigger=lambda a: a == 0,
         name_prefix='cliff-walking-'+str(train_eps)
     )  # 只录制第一次test
     
     res_dict = Solver.test(env, agent, cfg)
-    Solver.plot(res_dict['rewards'], cfg, tag='test', save=True, path='./output/results')
+    Solver.plot(res_dict['rewards'], cfg, tag='test', save=True, path='./output/results/')
 
 env.close()

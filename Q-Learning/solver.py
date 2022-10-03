@@ -9,7 +9,6 @@ class Solver(object):
         """
         env = gym.make(cfg['env_name'])
         env.reset(seed=seed)  # 设置随机种子
-        n_states = env.observation_space.n  # 状态维度
         n_actions = env.action_space.n  # 动作维度
         agent = QLearning(n_actions, cfg)
         return env, agent

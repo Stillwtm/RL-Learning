@@ -5,7 +5,7 @@ import numpy as np
 class QLearning(object):
     def __init__(self, n_actions, cfg):
         self.n_actions = n_actions
-        self.lr = cfg.get('lr', 0.9)
+        self.lr = cfg.get('lr', 0.1)
         self.gamma = cfg.get('gamma', 0.9)
         self.epsilon_beg = cfg.get('epsilon_beg', 0.95)
         self.epsilon_end = cfg.get('epsilon_end', 0.01)
