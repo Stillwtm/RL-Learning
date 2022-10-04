@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.distributions import Categorical
+from torch.autograd import Variable
 
 class PGNet(nn.Module):
     """Policy网络，这里采用两层的FC
@@ -63,31 +64,30 @@ class Reinforce(object):
             discounted_rewards[t] = running_add
         
         # 标准化
-        # with torch.no_grad():
         reward_mean = torch.mean(discounted_rewards)
         reward_std = torch.std(discounted_rewards, unbiased=False)
         discounted_rewards = (discounted_rewards - reward_mean) / reward_std
 
-        # 写法一，直接利用分类分布进行计算
-        self.optimizer.zero_grad()
-        for i in range(len(self.ep_rewards)):
-            state = torch.FloatTensor(self.ep_states[i]).to(self.device)
-            action = torch.FloatTensor([self.ep_actions[i]]).to(self.device)
-            reward = discounted_rewards[i]
-            probs = self.policy_net(state)
-            pd = Categorical(logits=probs)
-            loss = -pd.log_prob(action) * reward
-            loss.backward()
-        self.optimizer.step()
+        # 写法一，直接利用分类分布进行计算，但更推荐下面的写法二
+        # self.optimizer.zero_grad()
+        # for i in range(len(self.ep_rewards)):
+        #     state = torch.FloatTensor(self.ep_states[i]).to(self.device)
+        #     action = torch.FloatTensor([self.ep_actions[i]]).to(self.device)
+        #     reward = discounted_rewards[i]
+        #     p_actions = self.policy_net(state)
+        #     pd = Categorical(logits=p_actions)
+        #     loss = -pd.log_prob(action) * reward
+        #     loss.backward()
+        # self.optimizer.step()
     
         # 写法二，利用交叉熵进行计算，刚好符合-log的需求，已经实验两种方式计算的loss是一样的
-        # p_actions = self.policy_net(torch.FloatTensor(self.ep_states).to(self.device))
-        # neg_log_p = F.cross_entropy(p_actions, torch.LongTensor(self.ep_actions).to(self.device), reduction='none')
-        # loss = torch.mean(neg_log_p * discounted_rewards)
-        # # 反向传播，由于上面的loss有负号，故可以利用现成的梯度下降优化器来完成梯度上升
-        # self.optimizer.zero_grad()
-        # loss.backward()
-        # self.optimizer.step()
+        p_actions = self.policy_net(torch.FloatTensor(self.ep_states).to(self.device))
+        neg_log_p = F.cross_entropy(p_actions, torch.LongTensor(self.ep_actions).to(self.device), reduction='none')
+        loss = torch.mean(neg_log_p * discounted_rewards)
+        # 反向传播，由于上面的loss有负号，故可以利用现成的梯度下降优化器来完成梯度上升
+        self.optimizer.zero_grad()
+        loss.backward()
+        self.optimizer.step()
 
         # 清空这个episode内的数据
         self.clear_transition()

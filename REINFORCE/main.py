@@ -2,8 +2,8 @@ from solver import Solver, Drawer
 
 cfg = {
     'algo_name': 'REINFORCE',
-    'env_name': 'CartPole-v0',
-    'train_episodes': 500,
+    'env_name': 'CartPole-v1',
+    'train_episodes': 2000,
     'test_episodes': 20,
     'ep_max_steps': 100000,
     'lr': 0.01,
@@ -33,4 +33,4 @@ Drawer.plot(
     save=True, path='./output/results/'
 )
 
-agent.save('./output/models/')
+# agent.save('./output/models/')
