@@ -1,11 +1,11 @@
 import gym
 from gym.wrappers.record_video import RecordVideo
-from solver import Solver
+from solver import Solver, Drawer
 
 cfg = {
     'algo_name': 'Q-Learning',
     'env_name': 'CliffWalking-v0',
-    'train_episodes': 300,
+    'train_episodes': 50,
     'test_episodes': 20,
     'lr': 0.1,
     'gamma': 0.9,
@@ -16,21 +16,31 @@ cfg = {
 }
 
 
-for train_eps in [50, 100, 150, 200, 250, 300]:
-    cfg['train_episodes'] = train_eps
-
-    env, agent = Solver.env_agent_config(cfg)
+env, agent = Solver.env_agent_config(cfg)
+train_rewards = []
+for i in range(4):
+    # 训练
     res_dict = Solver.train(env, agent, cfg)
-    Solver.plot(res_dict['rewards'], cfg, tag='train', save=True, path='./output/results/')
-
-    env = gym.make(cfg['env_name'], render_mode='rgb_array')  # 录制视频
-    env = RecordVideo(
-        env, './output/results/',
+    train_rewards += res_dict['rewards']
+    # 测试+录像
+    env_rec = gym.make(cfg['env_name'], render_mode='rgb_array')  # 录制视频
+    env_rec = RecordVideo(
+        env_rec, './output/results/',
         episode_trigger=lambda a: a == 0,
-        name_prefix='cliff-walking-'+str(train_eps)
+        name_prefix='cliff-walking-'+str((i+1) * cfg['train_episodes'])
     )  # 只录制第一次test
-    
-    res_dict = Solver.test(env, agent, cfg)
-    Solver.plot(res_dict['rewards'], cfg, tag='test', save=True, path='./output/results/')
-
+    res_dict = Solver.test(env_rec, agent, cfg)
+    Drawer.plot(
+        res_dict['rewards'], cfg, tag='test'+str((i+1) * cfg['train_episodes']),
+        save=True, path='./output/results/'
+    )
+    env_rec.close()
 env.close()
+
+# 绘制训练图像
+Drawer.plot(
+    train_rewards, cfg, tag='train'+str((i+1) * cfg['train_episodes']),
+    save=True, path='./output/results/'
+)
+
+agent.save('./output/models/')

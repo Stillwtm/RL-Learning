@@ -3,7 +3,7 @@ from solver import Solver, Drawer
 cfg = {
     'algo_name': 'REINFORCE',
     'env_name': 'CartPole-v1',
-    'train_episodes': 2000,
+    'train_episodes': 200,
     'test_episodes': 20,
     'ep_max_steps': 100000,
     'lr': 0.01,
@@ -12,8 +12,9 @@ cfg = {
 }
 
 env, agent = Solver.create_env_agent(cfg)
+# env = env.unwrapped
 train_rewards = []
-for i in range(1):
+for i in range(5):
     # 训练
     res_dict = Solver.train(env, agent, cfg)
     train_rewards += res_dict['rewards']

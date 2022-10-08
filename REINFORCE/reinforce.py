@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.distributions import Categorical
-from torch.autograd import Variable
+import numpy as np
 
 class PGNet(nn.Module):
     """Policy网络，这里采用两层的FC
@@ -81,7 +81,7 @@ class Reinforce(object):
         # self.optimizer.step()
     
         # 写法二，利用交叉熵进行计算，刚好符合-log的需求，已经实验两种方式计算的loss是一样的
-        p_actions = self.policy_net(torch.FloatTensor(self.ep_states).to(self.device))
+        p_actions = self.policy_net(torch.FloatTensor(np.array(self.ep_states)).to(self.device))
         neg_log_p = F.cross_entropy(p_actions, torch.LongTensor(self.ep_actions).to(self.device), reduction='none')
         loss = torch.mean(neg_log_p * discounted_rewards)
         # 反向传播，由于上面的loss有负号，故可以利用现成的梯度下降优化器来完成梯度上升

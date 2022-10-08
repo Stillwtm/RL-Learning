@@ -56,7 +56,7 @@ class Solver(object):
         env = RecordVideo(
             env, './output/results/',
             episode_trigger=lambda a: a == 0,
-            name_prefix='cartpole-'+tag
+            name_prefix=cfg['env_name']+'-'+tag
         )  # 只录制第一次test
         return env
 

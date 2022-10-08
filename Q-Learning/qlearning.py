@@ -19,8 +19,8 @@ class QLearning(object):
         """
         self.sample_count += 1
         # 对epsilon进行指数衰减
-        self.epsilon = self.epsilon_beg + (self.epsilon_end - self.epsilon_beg) * \
-            math.exp(self.sample_count / self.epsilon_decay)
+        self.epsilon = self.epsilon_end + (self.epsilon_beg - self.epsilon_end) * \
+            math.exp(-self.sample_count / self.epsilon_decay)
         
         # epsilon-greedy策略
         if np.random.uniform(0, 1) > self.epsilon:

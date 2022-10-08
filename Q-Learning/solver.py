@@ -23,18 +23,18 @@ class Solver(object):
             while not done:
                 action = agent.sample(state)
                 next_state, reward, terminated, truncated, _ = env.step(action)
+                done = terminated or truncated
                 agent.update(state, action, reward, next_state, done)
                 ep_reward += reward
                 state = next_state
-                done = terminated or truncated
                 
             rewards.append(ep_reward)
-            print(f"Train episode {i+1}/{cfg['train_episodes']}: reward: {ep_reward}")
+            print(f"Train episode {i+1}/{cfg['train_episodes']}: reward: {ep_reward} epsilon: {agent.epsilon}")
         
         return {'rewards': rewards}
 
     @staticmethod
-    def test(env, agent, cfg, max_iters=500):
+    def test(env, agent, cfg, max_iters=150):
         rewards = []
         for i in range(cfg['test_episodes']):
             state = env.reset()[0]
@@ -53,17 +53,29 @@ class Solver(object):
         
         return {'rewards': rewards}
 
+class Drawer(object):
     @staticmethod
-    def plot(rewards, cfg, tag='test', save=False, path=None):
-        fig = plt.figure()
+    def smooth(data, weight=0.9):  
+        '''用于平滑曲线，weight越大越平滑
+        '''
+        last = data[0]
+        smoothed = []
+        for point in data:
+            smoothed_val = last * weight + (1 - weight) * point  # 计算平滑值
+            smoothed.append(smoothed_val)                    
+            last = smoothed_val                                
+        return smoothed
+
+    @staticmethod
+    def plot(data, cfg, tag='test', save=False, path=None):
+        plt.figure()
         plt.title("learning curve on {} of {} for {}".format(
             cfg['device'], cfg['algo_name'], cfg['env_name']))
         plt.xlabel('Epsiodes')
-        plt.plot(rewards, label='rewards')
+        plt.plot(data, label='rewards')
+        plt.plot(Drawer.smooth(data), label='smoothed_rewards')
         plt.legend()
         if save:
-            plt.savefig(path + tag + str(cfg['train_episodes']))
+            plt.savefig(path + tag)
         else:
             plt.show()
-
-
