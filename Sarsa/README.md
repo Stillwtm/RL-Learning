@@ -36,8 +36,6 @@
 
 在Sarsa和Q-Learning的收敛速度上，笔者肉眼没有很明显地看出区别，应该是这个环境比较简单，开始时曲线上升都比较快。
 
-关于两者的收敛速度：[强化学习中sarsa算法是不是比q-learning算法收敛速度更慢？](https://www.zhihu.com/question/268461866/answer/355932427)
-
 但Sarsa的收敛值确实是比Q-Learning要低的，这可以从最终的test曲线看出来：
 
 ![test400](./output/results/test400.png)
