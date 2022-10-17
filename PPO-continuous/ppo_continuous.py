@@ -175,7 +175,6 @@ class PPO(object):
                 actor_loss2 = torch.clamp(ratios, min=1-self.clip_eps, max=1+self.clip_eps) * advantages[batch]
                 actor_loss = -torch.min(actor_loss1, actor_loss2).mean() - self.coef_entropy * entropy.mean()
 
-
                 # 计算critic loss
                 critic_loss = F.mse_loss(critic_values, td_targets.detach()[batch])
 
@@ -188,7 +187,7 @@ class PPO(object):
                 nn.utils.clip_grad_norm_(self.critic.parameters(), 0.5) 
                 self.actor_optimizer.step()
                 self.critic_optimizer.step()
-                
+
         # 清空使用完的数据
         self.memory.clear()
     
