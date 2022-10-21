@@ -33,7 +33,7 @@ if __name__ == '__main__':
     parser.add_argument('--model_path', type=str, default='./output/models/', help='dir to save model')
     opt = parser.parse_args()
     default_args = {
-        'algo_name': 'DQN',
+        'algo_name': 'DDQN',
     }
     cfg = {**vars(opt), **default_args}  # 变成字典，个人觉得方便一点
 
