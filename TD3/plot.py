@@ -52,7 +52,7 @@ def draw_single_plot(data_path, plot_smooth=False, smooth_method='savgol'):
     for data in data_list:
         plt.figure()
         plt.title(f"Curve of seed {data['seed']}")
-        plt.xlabel('Epsiodes')
+        plt.xlabel('Steps')
         plt.ylabel('Rewards')
         sns.lineplot(x='step', y='reward', data=data, label='reward')
         if plot_smooth:
@@ -67,7 +67,7 @@ def draw_multi_plot(data_path, plot_smooth=False, smooth_method='savgol'):
     datas, _ = extract_data(data_path)
     plt.figure()
     plt.title(f"Curve of seed {datas['seed']}")
-    plt.xlabel('Epsiodes')
+    plt.xlabel('Steps')
     plt.ylabel('Rewards')
     sns.lineplot(x='step', y='reward', data=datas, label='reward')
     if plot_smooth:
