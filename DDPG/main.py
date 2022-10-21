@@ -17,7 +17,6 @@ if __name__ == '__main__':
     parser.add_argument('--max_train_steps', type=int, default=int(8e4), help='max training steps')
     parser.add_argument('--eval_every', type=int, default=int(500), help='evaluate interval, in steps')
     parser.add_argument('--save_model_every', type=int, default=int(5e4), help='save model interval, in steps')
-    parser.add_argument('--update_every', type=int, default=50, help='update interval, in steps')
     parser.add_argument('--buffer_capacity', type=int, default=int(1e4), help='capacity of replay buffer')
     parser.add_argument('--hidden_dim', type=int, default=64, help='hidden dimension of Q net')
     parser.add_argument('--gamma', type=float, default=0.99, help='discount factor')

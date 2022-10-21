@@ -23,7 +23,7 @@ def train(env, eval_env, agent, cfg, logger):
         for _ in range(cfg['ep_max_steps']):
             action = agent.sample_action(state)
             next_state, reward, terminated, truncated, _ = env.step(action)
-            agent.buffer.push(state, action, reward, next_state, terminated or truncated)
+            agent.buffer.push(state, action, reward, next_state, terminated)
             state = next_state
             steps += 1
             if steps > cfg['start_size']:
