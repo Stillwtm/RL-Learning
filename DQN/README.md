@@ -24,5 +24,5 @@
 
 以默认超参数训练8e4个step，得到训练曲线如下：
 
-![train8000](./output/results/DQN_CartPole-v1_20221020-132924/figure_[139, 22, 230, 150, 868].png)
+![train8000](https://s2.loli.net/2023/04/06/GXlZeQ2uacTkAJU.png)
 

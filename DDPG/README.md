@@ -24,5 +24,5 @@
 
 以默认超参数训练8e4个step，得到训练曲线如下：
 
-![train80000](./output/results/DDPG_Pendulum-v1_20221021-001951/figure_[238, 301, 108, 364, 191].png)
+![train80000](https://s2.loli.net/2023/04/06/WsoivLNQVaYDgy6.png)
 

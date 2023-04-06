@@ -44,7 +44,7 @@
 
 训练8e4个step，得到训练曲线如下：
 
-![train80000](./output/results/TD3_Pendulum-v1_20221021-121305/figure_[238, 301, 108, 364, 191].png)
+![train80000](https://s2.loli.net/2023/04/06/5BuyQPvm8pkUs3F.png)
 
 可见收敛得很快很稳。事实上，如果直接观察训练数据可以看出，收敛值实际上比PPO算法要高，大约在-150往上，而个人实现的PPO在-200偏下。
 
@@ -70,7 +70,7 @@
 
 训练1e6个step，得到训练曲线如下：
 
-![figure_[210]](./output/results/TD3_HalfCheetah-v4_20221021-163641/figure_[210].png)
+![figure_[210]](https://s2.loli.net/2023/04/06/9wmx7ItsWuZ8O2M.png)
 
 由于笔者的小笔记本跑得太慢，所以只有一条曲线:crying_cat_face:
 
@@ -102,11 +102,11 @@ $$
 
 正确写法下：
 
-![figure_[642, 239, 70, 926, 516]](./output/results/TD3_Pendulum-v1_20221021-155412/figure_[642, 239, 70, 926, 516].png)
+![figure_[642, 239, 70, 926, 516]](https://s2.loli.net/2023/04/06/yjDL5nQvZFCGIMq.png)
 
 错误写法下：
 
-![figure_[642, 239, 70, 926, 516]](./output/results/TD3_Pendulum-v1_20221021-161907/figure_[642, 239, 70, 926, 516].png)
+![figure_[642, 239, 70, 926, 516]](https://s2.loli.net/2023/04/06/eqniv3Es4WaX9Tr.png)
 
 可以看到，错误写法虽然也可以学习，但是明显收敛速度慢很多。
 
